@@ -116,8 +116,58 @@ function questionSolver(page, question, answer) {
           delay: 20,
         });
       })
-      .then(function () {})
-  })
+      .then(function () {
+        let ctrlIsPressedPromise = page.keyboard.down("Control");
+        return ctrlIsPressedPromise;
+      })
+      .then(function () {
+        let AisPressedPromise = page.keyboard.press("A", { delay: 100 });
+        return AisPressedPromise;
+      })
+      .then(function () {
+        let XisPressedPromise = page.keyboard.press("X", { delay: 100 });
+        return XisPressedPromise;
+      })
+      .then(function () {
+        let ctrlIsReleasedPromise = page.keyboard.up("Control");
+        return ctrlIsReleasedPromise;
+      })
+      .then(function () {
+        let waitForCodeAreaPromise = waitAndClick(
+          ".monaco-editor.no-user-select.vs",
+          page
+        );
+        return waitForCodeAreaPromise;
+      })
+      .then(function () {
+        let ctrlIsPressedPromise = page.keyboard.down("Control");
+        return ctrlIsPressedPromise;
+      })
+      .then(function () {
+        let AisPressedPromise = page.keyboard.press("A", { delay: 100 });
+        return AisPressedPromise;
+      })
+      .then(function () {
+        let XisPressedPromise = page.keyboard.press("V", { delay: 100 });
+        return XisPressedPromise;
+      })
+      .then(function () {
+        let ctrlIsReleasedPromise = page.keyboard.up("Control");
+        return ctrlIsReleasedPromise;
+      })
+      .then(function () {
+        let runButtonClicked = page.click(" .hr-monaco__run-code", {
+          delay: 50,
+        });
+        return runButtonClicked;
+      })
+      .then(function () {
+        resolve();
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  });
 }
 
 console.log("After");
